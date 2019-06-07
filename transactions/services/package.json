@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
+    "dev-start": "npm i && nodemon --exec babel-node index.js",
     "build": "webpack --mode development",
     "production-start": "webpack --mode production && pm2 start build/app.bundle.js",
     "start-build": "pm2 start build/app.bundle.js",
