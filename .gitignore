@@ -1,3 +1,5 @@
 transactions/services/node_modules
 transactions/services/build
+events/services/node_modules
+events/services/build
 transactions/mongodb_data

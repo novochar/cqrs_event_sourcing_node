@@ -10,11 +10,7 @@ services:
       - ./transactions/services:/app
     ports:
       - 8080:8080
-  transactions_data:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-    - ./transactions/mongodb_data:/data/db
+  queue:
+    image: redis
+    ports:
+     - 6379:6379
