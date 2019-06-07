@@ -1,1 +1,3 @@
 transactions/node_modules
+transactions/build
+transactions/mongodb_data
