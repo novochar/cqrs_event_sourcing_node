@@ -1,13 +1,25 @@
-import express from 'express'
+import RSMQWorker from  "rsmq-worker"
+import RedisSMQ from 'rsmq'
 
-const app = express()
+const rsmq = new RedisSMQ({ host: "queue", port: 6379, ns: "rsmq"}),
+  worker = new RSMQWorker( "events", {alwaysLogErrors: true, rsmq} )
 
-app.get('*', (req, res) => {
-    res.send("ok")
+worker.on( "message", function( msg, next, id ){
+	// process your message
+  console.log("Message id : " + id)
+  console.log(msg);
+  next()
 })
 
-const PORT = process.env.PORT || 8080
-app.listen(PORT, () => {
-    console.log(`App listening to ${PORT}....`)
-    console.log('Press Ctrl+C to quit.')
+// optional error listeners
+worker.on('error', function( err, msg ){
+  console.log( "ERROR", err, msg.id )
 })
+worker.on('exceeded', function( msg ){
+  console.log( "EXCEEDED", msg.id )
+})
+worker.on('timeout', function( msg ){
+  console.log( "TIMEOUT", msg.id, msg.rc )
+})
+
+worker.start()

@@ -10,6 +10,13 @@ services:
       - ./transactions/services:/app
     ports:
       - 8080:8080
+  events_service:
+    build: "./events/services"
+    working_dir: "/app"
+    restart: always
+    command: "npm run dev-start"
+    volumes:
+      - ./events/services:/app
   queue:
     image: redis
     ports:

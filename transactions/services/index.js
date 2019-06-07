@@ -1,17 +1,12 @@
 import express from 'express'
 import RedisSMQ from 'rsmq'
 
-const rsmq = new RedisSMQ( {host: "queue", port: 6379, ns: "rsmq"} )
-rsmq.createQueueAsync({qname:"myqueue"}).then(function (resp) {
-	if (resp===1) {
-		console.log("queue created")
-	}
-});
+const rsmq = new RedisSMQ( {host: "queue", port: 6379, ns: "rsmq" } )
 
 const app = express()
 
 app.get('*', (req, res) => {
-    rsmq.sendMessageAsync({qname:"myqueue", message:"Hello World"}).then(function (resp) {
+    rsmq.sendMessageAsync({qname:"events", message:"Hello World"}).then(function (resp) {
         if (resp) {
             console.log("Message sent. ID:", resp);
         }
