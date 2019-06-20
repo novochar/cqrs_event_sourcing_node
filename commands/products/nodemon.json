@@ -1,0 +1,7 @@
+{
+  "env": {
+    "REDIS_HOST" : "events_queue",
+    "REDIS_PORT" : 6379,
+    "HOST_PORT" : 8080
+  }
+}

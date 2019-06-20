@@ -1,8 +1,8 @@
 import RSMQWorker from  "rsmq-worker"
 import RedisSMQ from 'rsmq'
 
-const rsmq = new RedisSMQ({ host: "queue", port: 6379, ns: "rsmq"}),
-  worker = new RSMQWorker( "events", {alwaysLogErrors: true, rsmq} )
+const rsmq = new RedisSMQ({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT, ns: "rsmq"}),
+  worker = new RSMQWorker( "products_events", {alwaysLogErrors: true, rsmq} )
 
 worker.on( "message", function( msg, next, id ){
 	// process your message
