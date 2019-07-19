@@ -33,36 +33,37 @@ services:
     command: "npm run dev-start"
     links:
       - events_queue
+      - logs_stream
     volumes:
       - ./events/products:/app
 
-#streams
-#   logs_stream:
-#     image: docker.elastic.co/logstash/logstash:6.6.2
-#     volumes:
-#       - ./streams/logs:/usr/share/logstash/pipeline/
-#     ports:
-#       - 3000:3000
-#     depends_on:
-#       - elasticsearch
+# streams
+  logs_stream:
+    image: docker.elastic.co/logstash/logstash:6.6.2
+    volumes:
+     - ./streams/logs:/usr/share/logstash/pipeline/
+    ports:
+     - 3000:3000
+    depends_on:
+     - elasticsearch
 
-# #dashboard
-#   kibana:
-#     depends_on:
-#       - elasticsearch
-#     image: docker.elastic.co/kibana/kibana:7.1.1
-#     ports:
-#       - 5601:5601
+ #dashboard
+  kibana:
+    depends_on:
+     - elasticsearch
+    image: docker.elastic.co/kibana/kibana:7.1.1
+    ports:
+     - 5601:5601
   
-#   #data
-#   elasticsearch:
-#     image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1  
-#     ports: 
-#       - 9200:9200
-#     environment:
-#       - discovery.type=single-node
-#     volumes:
-#       - ./data/elasticseach:/usr/share/elasticsearch/data
+   #data
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1  
+    ports: 
+     - 9200:9200
+    environment:
+     - discovery.type=single-node
+    volumes:
+     - ./data/elasticseach:/usr/share/elasticsearch/data
 
   events_queue:
     image: redis
