@@ -27,8 +27,8 @@
     "babel-loader": "^8.0.6",
     "nodemon": "^1.19.1",
     "pm2": "^3.5.1",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
     "webpack-node-externals": "^1.7.2"
   }
 }
